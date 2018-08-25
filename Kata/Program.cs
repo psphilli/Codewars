@@ -7,6 +7,9 @@ namespace Codewars
     {
         #region UpdateLight
 
+        /// <summary>
+        /// https://www.codewars.com/kata/thinkful-logic-drills-traffic-light/solutions/csharp
+        /// </summary>
         public static string UpdateLight(string current)
         {
             switch (current)
@@ -26,12 +29,18 @@ namespace Codewars
 
         #region Greet
 
+        /// <summary>
+        /// https://www.codewars.com/kata/function-1-hello-world/solutions/csharp
+        /// </summary>
         public static string Greet() => "hello world!";
 
         #endregion
 
         #region GetMiddle
 
+        /// <summary>
+        /// https://www.codewars.com/kata/get-the-middle-character/solutions/csharp
+        /// </summary>
         public static string GetMiddle(string s)
         {
             if (String.IsNullOrEmpty(s))
