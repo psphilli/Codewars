@@ -5,137 +5,148 @@ using System.Collections.Generic;
 namespace Codewars
 {
     [TestFixture]
-    public class ValidatePinTests
-    {   
-        [Test, Description("ValidatePin should return false for pins with length other than 4 or 6")]
-        public void LengthTest()
+    class MexicanWaveTests
+    {
+        [TestCase]
+        public void BasicTest1()
         {
-            Assert.AreEqual(false, Kata.ValidatePin("1"), "Wrong output for \"1\"");
-            Assert.AreEqual(false, Kata.ValidatePin("12"), "Wrong output for \"12\"");
-            Assert.AreEqual(false, Kata.ValidatePin("123"), "Wrong output for \"123\"");
-            Assert.AreEqual(false, Kata.ValidatePin("12345"), "Wrong output for \"12345\"");
-            Assert.AreEqual(false, Kata.ValidatePin("1234567"), "Wrong output for \"1234567\"");
-            Assert.AreEqual(false, Kata.ValidatePin("-1234"), "Wrong output for \"-1234\"");
-            Assert.AreEqual(false, Kata.ValidatePin("1.234"), "Wrong output for \"1.234\"");
-            Assert.AreEqual(false, Kata.ValidatePin("-1.234"), "Wrong output for \"-1.234\"");
-            Assert.AreEqual(false, Kata.ValidatePin("00000000"), "Wrong output for \"00000000\"");
+            Kata kata = new Kata();
+            List<string> result = new List<string> { "Hello", "hEllo", "heLlo", "helLo", "hellO" };
+            Assert.AreEqual(result, kata.wave("hello"), "it should return '"+result+"'");
         }
-        
-        [Test, Description("ValidatePin should return false for pins which contain characters other than digits")]
-        public void NonDigitTest()
+
+        [TestCase]
+        public void BasicTest2()
         {
-            Assert.AreEqual(false, Kata.ValidatePin("a234"), "Wrong output for \"a234\"");
-            Assert.AreEqual(false, Kata.ValidatePin(".234"), "Wrong output for \".234\"");
+            Kata kata = new Kata();
+            List<string> result = new List<string> { "Codewars", "cOdewars", "coDewars", "codEwars", "codeWars", "codewArs", "codewaRs", "codewarS" };
+            Assert.AreEqual(result, kata.wave("codewars"), "it should return '" + result + "'");
         }
-        
-        [Test, Description("ValidatePin should return true for valid pins")]
-        public void ValidTest()
+
+        [TestCase]
+        public void BasicTest3()
         {
-            Assert.AreEqual(true, Kata.ValidatePin("1234"), "Wrong output for \"1234\"");
-            Assert.AreEqual(true, Kata.ValidatePin("0000"), "Wrong output for \"0000\"");
-            Assert.AreEqual(true, Kata.ValidatePin("1111"), "Wrong output for \"1111\"");
-            Assert.AreEqual(true, Kata.ValidatePin("123456"), "Wrong output for \"123456\"");
-            Assert.AreEqual(true, Kata.ValidatePin("098765"), "Wrong output for \"098765\"");
-            Assert.AreEqual(true, Kata.ValidatePin("000000"), "Wrong output for \"000000\"");
-            Assert.AreEqual(true, Kata.ValidatePin("090909"), "Wrong output for \"090909\"");
+            Kata kata = new Kata();
+            List<string> result = new List<string> { };
+            Assert.AreEqual(result, kata.wave(""), "it should return '" + result + "'");
+        }
+
+        [TestCase]
+        public void BasicTest4()
+        {
+            Kata kata = new Kata();
+            List<string> result = new List<string> { "Two words", "tWo words", "twO words", "two Words", "two wOrds", "two woRds", "two worDs", "two wordS" };
+            Assert.AreEqual(result, kata.wave("two words"), "it should return '" + result + "'");
+        }
+
+        [TestCase]
+        public void BasicTest5()
+        {
+            Kata kata = new Kata();
+            List<string> result = new List<string> { " Gap ", " gAp ", " gaP " };
+            Assert.AreEqual(result, kata.wave(" gap "), "it should return '" + result + "'");
         }
     }
 
     [TestFixture]
-    public static class RevrotTests 
+    public class WeightSortTests
     {
-        private static void testing(string actual, string expected) 
-        {
-            Assert.AreEqual(expected, actual);
-        }
 
         [Test]
-        public static void test1() 
+        public void Test1()
         {
-            Console.WriteLine("Testing RevRot");        
-            testing(Kata.RevRot("1234", 0), "");
-            testing(Kata.RevRot("", 0), "");
-            testing(Kata.RevRot("1234", 5), "");
-            String s = "733049910872815764";
-            testing(Kata.RevRot(s, 5), "330479108928157");
+            Console.WriteLine("****** Basic Tests");
+            Assert.AreEqual("2000 103 123 4444 99", Kata.orderWeight("103 123 4444 99 2000"));
+            Assert.AreEqual("11 11 2000 10003 22 123 1234000 44444444 9999", Kata.orderWeight("2000 10003 1234000 44444444 9999 11 11 22 123"));
+            Assert.AreEqual("100 180 90 56 65 74 68 86 99", Kata.orderWeight("56 65 74 100 99 68 86 180 90"));
         }
-    }     
-
-    [TestFixture]
-    public class IsPrimeTests
-    {
-        private static IEnumerable<TestCaseData> sampleTestCases
-        {
-            get
-            {
-                yield return new TestCaseData(0).Returns(false);
-                yield return new TestCaseData(1).Returns(false);
-                yield return new TestCaseData(2).Returns(true);
-            }
-        }
-
-        [Test, TestCaseSource("sampleTestCases")]
-        public bool SampleTest(int n) => Kata.IsPrime(n);
     }
 
     [TestFixture]
-    public class BouncingBallTests 
+    public class MoveZeroesToTheEnd
     {
+        [Test]
+        public void Test()
+        {
+            Assert.AreEqual(new int[] {1, 2, 1, 1, 3, 1, 0, 0, 0, 0}, Kata.MoveZeroes(new int[] {1, 2, 0, 1, 0, 1, 0, 3, 0, 1}));
+        }
+    }
+
+    [TestFixture]
+    public class CaesarCipherTests {
 
         [Test]
         public void Test1() {
-            Assert.AreEqual(3, Kata.bouncingBall(3.0, 0.66, 1.5));
+            string u = "I should have known that you would have a perfect answer for me!!!";
+            Assert.AreEqual(u, Kata.demovingShift(Kata.movingShift(u, 1), 1));
+        }
+    }
+
+    [TestFixture]
+    public class MaxSequence
+    {
+        [Test]
+        public void Test0()
+        {
+            Assert.AreEqual(0, Kata.MaxSequence(new int[0]));
         }
 
         [Test]
-        public void Test2() {
-            Assert.AreEqual(15, Kata.bouncingBall(30.0, 0.66, 1.5));
+        public void Test1()
+        {
+            Assert.AreEqual(6, Kata.MaxSequence(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}));
+        }
+
+        [Test]
+        public void Test2()
+        {
+            Assert.AreEqual(0, Kata.MaxSequence(new int[]{-2, -1, -3, -4, -1, -2, -1, -5, -4}));
         }
     }
     
     [TestFixture]
-    public class TimedReading
+    public static class KPrimesTests 
     {
+
+        private static string Array2String( long[] list )
+        {
+            return "[" + string.Join(", ", list) + "]";
+        }
+        private static void testing(string actual, string expected) 
+        {
+            Assert.AreEqual(expected, actual);
+        }
+    
         [Test]
-        public void BasicTests(){
-            Assert.AreEqual(7,  Kata.TimedReading(4,"The Fox asked the stork, 'How is the soup?'"));
-            Assert.AreEqual(0,  Kata.TimedReading(1,"..."));
-            Assert.AreEqual(3,  Kata.TimedReading(3,"This play was good for us."));
-            Assert.AreEqual(5,  Kata.TimedReading(3,"Suddenly he stopped, and glanced up at the houses"));
-            Assert.AreEqual(11,  Kata.TimedReading(6,"Zebras evolved among the Old World horses within the last four million years."));
-            Assert.AreEqual(6,  Kata.TimedReading(5,"Although zebra species may have overlapping ranges, they do not interbreed."));
-            Assert.AreEqual(0,  Kata.TimedReading(1,"Oh!"));
-            Assert.AreEqual(14,  Kata.TimedReading(5,"Now and then, however, he is horribly thoughtless, and seems to take a real delight in giving me pain."));
+        public static void test1() 
+        {        
+            Console.WriteLine("Basic Tests CountKprimes");
+            testing(Array2String(Kata.CountKprimes(2, 0, 100)), 
+                    Array2String(new long[] 
+                    {4, 6, 9, 10, 14, 15, 21, 22, 25, 26, 33, 34, 35, 38, 39, 46, 49, 51,
+                    55, 57, 58, 62, 65, 69, 74, 77, 82, 85, 86, 87, 91, 93, 94, 95}));
+            testing(Array2String(Kata.CountKprimes(3, 0, 100)), 
+                    Array2String(new long[] 
+                    {8, 12, 18, 20, 27, 28, 30, 42, 44, 45, 50, 52, 63, 66, 68, 70, 75, 76,
+                    78, 92, 98, 99}));
+            testing(Array2String(Kata.CountKprimes(5, 1000, 1100)), 
+                    Array2String(new long[] 
+                    {1020, 1026, 1032, 1044, 1050, 1053, 1064, 1072, 1092, 1100}));
+            testing(Array2String(Kata.CountKprimes(5, 500, 600)), 
+                    Array2String(new long[] 
+                    {500, 520, 552, 567, 588, 592, 594}));
         }
     }
 
     [TestFixture]
-    public class RgbToHex 
-    {
-        [Test]
-        public void FixedTests() 
-        {
-            Assert.AreEqual("FFFFFF", Kata.Rgb(255,255,255));
-            Assert.AreEqual("FFFFFF", Kata.Rgb(255,255,300));
-            Assert.AreEqual("000000", Kata.Rgb(0,0,0));
-            Assert.AreEqual("9400D3", Kata.Rgb(148,0,211));
-            Assert.AreEqual("9400D3", Kata.Rgb(148,-20,211), "Handle negative numbers.");
-            Assert.AreEqual("90C3D4", Kata.Rgb(144,195,212));
-            Assert.AreEqual("D4350C", Kata.Rgb(212,53,12), "Consider single hex digit numbers.");
-        }                
-    }
+    public class AreTheySameTests {
 
-    [TestFixture]
-    public class HumanReadableTime 
-    {
         [Test]
-        public void HumanReadableTimeTest() 
-        {
-            Assert.AreEqual("00:00:00", Kata.GetReadableTime(0));
-            Assert.AreEqual("00:00:05", Kata.GetReadableTime(5));
-            Assert.AreEqual("00:01:00", Kata.GetReadableTime(60));
-            Assert.AreEqual("23:59:59", Kata.GetReadableTime(86399));
-            Assert.AreEqual("99:59:59", Kata.GetReadableTime(359999));
-        }                
+        public void Test1() {
+            int[] a = new int[] {121, 144, 19, 161, 19, 144, 19, 11};
+            int[] b = new int[] {11*11, 121*121, 144*144, 19*19, 161*161, 19*19, 144*144, 19*19};
+            bool r = Kata.comp(a, b); // True
+            Assert.AreEqual(true, r);
+        }
     }
 }
